@@ -1,0 +1,198 @@
+<?php 
+session_start();
+include('include/con.php');
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--data table-->
+
+    <!--data table end-->
+
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <title>
+        Family List
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="assets/css/soft-ui-dashboard.css?v=1.0.8" rel="stylesheet" />
+    
+    <link href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.3.1/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+    <?php
+    include('include/side-navbar.php');
+    ?>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card z-index-2">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title">बेडा माहिती</h4>
+                            <a href="beda-details"><button class="btn btn-info" type="button">बेडा भरा</button></a>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="conatiner">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">
+
+                                            <table id="example" class="table" style="width:100%">
+                                                <thead>
+                                                    <tr style="background-color:#415a8c; color:#f7f8fa ;">
+                                                        <th>अनु क्र.</th>
+                                                        <!--<th>Village:</th>-->
+                                                        <th>शालेय शिक्षण आणि साक्षरता विभाग</th>
+                                                        <th>आयुष मंत्रालय</th>
+                                                        <!--<th>Gut Gram Panchayat:</th>-->
+                                                        <th>दुरसंचार विभाग</th>
+                                                        <th>कौशल्य विकास आणि उद्योजकता मंत्रालय</th>
+                                                        <th>इलेक्ट्रोनिक्स आणि माहिती तंत्रज्ञान मंत्रालय</th>
+                                                        <th>कृषी आणि शेतकरी कल्याण मंत्रालय</th>
+                                                        <th>मत्स्यव्यवसाय मंत्रालय</th>
+                                                        <th>पंचायत राज मंत्रालय</th>
+                                                        <th>ऊर्जा मंत्रालय</th>
+                                                        <th>नवीन आणि नवीकरणीय ऊर्जा मंत्रालय</th>
+                                                        <th>आरोग्य आणि कुटुंब कल्याण मंत्रालय</th>
+                                                        <th>महिला आणि बाल विकास मंत्रालय</th>
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody>
+                                            <?php
+                                            $i = 1;
+
+                                            $query = mysqli_query($con,"SELECT `DoSEL`, `DoSELShera`, `MoAYUSH`, `MoAYUSHShera`, `DoTelecom`, `DoTelecomShera`, `MoSDE`, `MoSDEShera`, `MeiTY`, `MeiTYShera`, `MoAFW`,`MoAFWShera`,`MoFAHD`,`MoFAHDShera`,`MoPR`,`MoPRShera`,`MoP`,`MoPShera`,`MoNRE`,`MoNREShera`,`MoHFW`,`MoHFWShera`,`MoWCD`,`MoWCDShera`,`remark`, `createdId`, `dateTime` FROM `bedaDetails` WHERE 1") or die("error");
+
+                                            while($fetch = mysqli_fetch_assoc($query)){
+
+                                                // Conversion: 1 = होय, else नाही
+                                                $fields = ['DoSEL', 'MoAYUSH', 'DoTelecom', 'MoSDE', 'MeiTY', 'MoAFW', 'MoFAHD', 'MoPR', 'MoP', 'MoNRE', 'MoHFW', 'MoWCD'];
+                                                foreach($fields as $field){
+                                                    $fetch[$field] = ($fetch[$field] == 1) ? 'होय' : 'नाही';
+                                                }
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $i++; ?></td>
+                                                <td><?php echo $fetch['DoSEL'] . " (" . $fetch['DoSELShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MoAYUSH'] . " (" . $fetch['MoAYUSHShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['DoTelecom'] . " (" . $fetch['DoTelecomShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MoSDE'] . " (" . $fetch['MoSDEShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MeiTY'] . " (" . $fetch['MeiTYShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MoAFW'] . " (" . $fetch['MoAFWShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MoFAHD'] . " (" . $fetch['MoFAHDShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MoPR'] . " (" . $fetch['MoPRShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MoP'] . " (" . $fetch['MoPShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MoNRE'] . " (" . $fetch['MoNREShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MoHFW'] . " (" . $fetch['MoHFWShera'] . ")"; ?></td>
+                                                <td><?php echo $fetch['MoWCD'] . " (" . $fetch['MoWCDShera'] . ")"; ?></td>
+                                            </tr>
+                                            <?php } ?>
+                                            
+                                            <?php
+                                                        $dataTable .= "<script>
+                                                                            $(document).ready(function () {
+                                                                                
+                                                                                /*$('#memberTable".$familyId."').DataTable({
+                                                                                    'responsive': true,
+                                                                                    'bPaginate': false,
+                                                                                    'bFilter': false,
+                                                                                    'bInfo': false
+                                                                                });*/
+                                                                            });    
+                                                                            
+                                                                        </script>";
+                                                    ?>
+                                            </tbody>
+
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php include('include/footer.php'); ?>
+        </div>
+    </main>
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="assets/js/plugins/chartjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+        $("#disabledCertificateDiv").hide();
+        $("input[name=disabled_handicap]").on('click', function () {
+            if ($(this).val() == "1") {
+                $("#disabledCertificateDiv").show();
+            } else {
+                $("#disabledCertificateDiv").hide();
+            }
+        })
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+
+    <?php 
+    
+    require_once('include/sweetAlert.php');
+    if(isset($_SESSION['status'])){
+        $status = $_SESSION['status'];
+        $msg = $_SESSION['msg'];
+        if($status != true){
+            toastMsg('error', $msg);
+        } else {
+            toastMsg('success', $msg);
+        }
+        unset($_SESSION['status']);
+        unset($_SESSION['msg']);
+    }
+    echo $dataTable;
+    ?>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                'responsive': true
+            });
+        });
+    </script>
+</body>
+
+</html>
