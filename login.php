@@ -80,7 +80,7 @@ session_start();
                     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                         <div class="card z-index-0">
                             <div class="text-center pt-4">
-                                <h5>_सर्वेक्षण व नोंदणी पोर्टल</h5>
+                                <h5>सर्वेक्षण व नोंदणी पोर्टल</h5>
                             </div>
                             <div class="card-body">
                                 <form role="form text-left" action="login_db" method="post">
