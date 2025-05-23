@@ -9,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <title>
-        सर्व्हेक्षण व नोंदणी पोर्टल
+        सर्व्हेक्षण व नोंदणी पोर्टल - MilesWebb
     </title>
 
 
