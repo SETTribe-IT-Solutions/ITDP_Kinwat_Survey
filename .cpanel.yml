@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/nmrmlatur/test.settribe.com/survey
+    - /bin/cp -r * $DEPLOYPATH
